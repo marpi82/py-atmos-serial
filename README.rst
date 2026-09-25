@@ -9,19 +9,18 @@ It is the push-side data layer for the Home Assistant integration in
 
 **Status:** ``2026.9.0a1`` sketch, published to reserve the PyPI name. The port, the byte buffer, and the update bus exist.
 Frame layout, checksum, baud, and the register map have not been
-reverse-engineered. :func:`pyatmos_serial.protocol.decode_frames` raises
-:class:`pyatmos_serial.errors.ProtocolUnknownError` for any non-empty buffer.
-:data:`pyatmos_serial.CODEC_IMPLEMENTED` is ``False``.
+reverse-engineered. ``decode_frames`` raises ``ProtocolUnknownError`` for any
+non-empty buffer. ``CODEC_IMPLEMENTED`` is ``False``.
 
 What works today
 ----------------
 
-* :class:`pyatmos_serial.SerialSettings` checks the port name and baud rate.
+* ``SerialSettings`` checks the port name and baud rate.
   8N1 is only a UART placeholder, not a captured bus setting.
-* :class:`pyatmos_serial.SerialPortSource` opens a serial port and reads it
+* ``SerialPortSource`` opens a serial port and reads it
   without blocking the event loop.
-* :class:`pyatmos_serial.AtmosSerialFeed` counts bytes and would publish
-  :class:`pyatmos_serial.RegisterUpdate` when a decoder emits a frame.
+* ``AtmosSerialFeed`` counts bytes and would publish
+  ``RegisterUpdate`` when a decoder emits a frame.
   Until then it publishes nothing and keeps the listen loop alive.
 
 What this library does not do
