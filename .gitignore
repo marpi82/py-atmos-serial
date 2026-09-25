@@ -21,5 +21,7 @@ coverage.xml
 venv/
 .env
 
+docs/_build/
+
 .idea/
 *.log

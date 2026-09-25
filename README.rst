@@ -7,7 +7,7 @@ It is the push-side data layer for the Home Assistant integration in
 
 **PyPI name:** ``py-atmos-serial``. Import as ``import pyatmos_serial``.
 
-**Status:** sketch. The port, the byte buffer, and the update bus exist.
+**Status:** ``2026.9.0a1`` sketch, published to reserve the PyPI name. The port, the byte buffer, and the update bus exist.
 Frame layout, checksum, baud, and the register map have not been
 reverse-engineered. :func:`pyatmos_serial.protocol.decode_frames` raises
 :class:`pyatmos_serial.errors.ProtocolUnknownError` for any non-empty buffer.
