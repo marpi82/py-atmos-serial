@@ -85,6 +85,7 @@ async def test_publish_path_skips_a_repeated_value(monkeypatch: pytest.MonkeyPat
     assert await feed.read_once() == 0
     assert await feed.read_once() == 1
     await collector
+    assert collector.done()
     assert [item.value for item in found] == [5, 9]
     assert feed.store.get(7) == 9
     assert decode_frames(b"") == ((), b"")
