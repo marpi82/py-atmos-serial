@@ -23,6 +23,14 @@ logger = logging.getLogger(__name__)
 _BUFFER_LIMIT = 4096
 
 
+async def _await_cancelled(task: asyncio.Task[None]) -> None:
+    """Wait for a cancelled task without ``contextlib.suppress``."""
+    try:
+        await task
+    except asyncio.CancelledError:
+        return
+
+
 class ByteSource(Protocol):
     """The read call :class:`AtmosSerialFeed` needs from a port."""
 
@@ -178,8 +186,7 @@ class AtmosSerialFeed:
         self._task = None
         if task is not None:
             task.cancel()
-            with suppress(asyncio.CancelledError):
-                await task
+            await _await_cancelled(task)
         await self._source.close()
 
     async def _publish(self, frames: tuple[BusFrame, ...]) -> int:
